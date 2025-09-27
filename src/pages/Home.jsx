@@ -287,6 +287,7 @@ const Home = () => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`Link to my ${social.name} profile`}
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 1.2 + index * 0.1 }}
@@ -437,6 +438,7 @@ const Home = () => {
                         href={project.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`View live demo of ${project.title}`}
                         className="text-blue-400 hover:text-blue-300 font-medium flex items-center"
                       >
                         <ExternalLink size={16} className="mr-1" />
@@ -448,6 +450,7 @@ const Home = () => {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`View source code of ${project.title} on GitHub`}
                         className="text-gray-400 hover:text-gray-300 font-medium flex items-center"
                       >
                         <Github size={16} className="mr-1" />
