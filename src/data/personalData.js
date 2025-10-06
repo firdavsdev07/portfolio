@@ -14,17 +14,17 @@ export const personalInfo = {
 export const socialLinks = [
   {
     name: "GitHub",
-    url: "https://github.com/firdavsnormurodov",
+    url: "https://github.com/firdavsdev07",
     icon: "Github",
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/firdavsnormurodov",
+    url: "https://www.linkedin.com/in/firdavs-normurodov-667a85271",
     icon: "Linkedin",
   },
   {
     name: "Telegram",
-    url: "https://t.me/firdavsnormurodov",
+    url: "https://t.me/firdavs2407",
     icon: "Send",
   },
   {
