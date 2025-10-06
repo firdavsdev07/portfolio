@@ -163,13 +163,7 @@ const Footer = () => {
               className="text-gray-400 text-sm mb-4 sm:mb-0"
             >
               <p className="flex items-center">
-                © {currentYear} {personalInfo.name}. Made with
-                <Heart
-                  size={16}
-                  className="mx-1 text-red-500"
-                  fill="currentColor"
-                />
-                in Tashkent
+                © {currentYear} {personalInfo.name}.
               </p>
             </motion.div>
 
