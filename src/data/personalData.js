@@ -103,64 +103,63 @@ export const skills = {
 export const workExperience = [
   {
     id: 1,
+    position: "Teaching Assistant",
+    company: "Najot Ta'lim",
+    location: "Tashkent, Uzbekistan",
+    duration: "Sep 2025 - Present",
+    type: "Part-time",
+    description:
+      "Working as a teaching assistant for fullstack development groups, helping students master modern web technologies.",
+    responsibilities: [
+      "Assisting in fullstack development courses",
+      "Mentoring students on best practices",
+      "Code review and debugging support",
+    ],
+    technologies: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Express",
+      "Nest.js",
+      "Next.js",
+      "SQL",
+      "NoSQL",
+      "CI/CD",
+    ],
+    highlights: [],
+  },
+  {
+    id: 2,
     position: "Fullstack Developer",
     company: "Freelance",
     location: "Tashkent, Uzbekistan",
-    duration: "2023 - 2024 (1+ Year)",
+    duration: "2024 - 2025",
     type: "Freelance",
     description:
-      "Developed full-stack applications and responsive websites using modern web technologies, delivering high-quality solutions for diverse client needs.",
+      "Developed full-stack applications using modern web technologies, delivering high-quality solutions for diverse client needs.",
     responsibilities: [
       "Built scalable web applications with React.js and Node.js",
       "Implemented user authentication and content management systems",
       "Created responsive, SEO-optimized websites",
-      "Integrated databases (MongoDB, MySQL) and APIs",
+      "Integrated databases and APIs",
       "Deployed applications with modern DevOps practices",
     ],
     technologies: [
-      "React.js",
-      "Next.js",
-      "Node.js",
       "TypeScript",
+      "Next.js",
+      "Nest.js",
       "MongoDB",
-      "Docker",
+      "PostgreSQL",
+      "CI/CD",
+      "AI Integration",
     ],
     highlights: [
       "Delivered 7+ projects with 100% client satisfaction",
       "Reduced development time by 30% using modern frameworks",
-      "Implemented clean architecture and best practices",
-    ],
-  },
-  {
-    id: 2,
-    position: "Frontend Developer",
-    company: "Personal Projects",
-    location: "Tashkent, Uzbekistan",
-    duration: "2022 - 2024 (2+ Years)",
-    type: "Personal",
-    description:
-      "Developed personal projects to master modern web technologies and create portfolio-worthy applications.",
-    responsibilities: [
-      "Created responsive, modern user interfaces",
-      "Implemented advanced animations and interactions",
-      "Built complex dashboard interfaces",
-      "Optimized applications for performance and SEO",
-    ],
-    technologies: [
-      "React.js",
-      "Next.js",
-      "Tailwind CSS",
-      "Framer Motion",
-      "JavaScript",
-    ],
-    highlights: [
-      "Built 7+ portfolio projects showcasing different skills",
-      "Mastered modern frontend frameworks and tools",
-      "Achieved excellent performance scores (90+ Lighthouse)",
     ],
   },
 ];
-
 
 export const education = [
   {
@@ -195,7 +194,7 @@ export const certificates = [
     id: 1,
     name: "Students Conference Certificate",
     issuer: "Najot Ta'lim",
-    date: "2024",
+    date: "2025",
     description:
       "Recognition for active participation and contribution in students conference",
   },
@@ -214,11 +213,10 @@ export const awards = [
     id: 1,
     title: "Startup Ideas Masterclass - Award Winner",
     description: "Won award for innovative startup idea and presentation",
-    date: "2024",
+    date: "2025",
     issuer: "Najot Ta'lim",
   },
 ];
-
 
 // SEO and Meta data
 export const seoData = {

@@ -2,459 +2,279 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import {
-  Download,
-  ExternalLink,
-  Github,
-  Linkedin,
-  Mail,
-  Send,
-  Code,
-  Briefcase,
-  ArrowRight,
-  Play,
-  Star,
-} from "lucide-react";
-import {
-  personalInfo,
-  socialLinks,
-  seoData,
-  skills,
-} from "../data/personalData";
+import { ArrowRight, Download, Github, Linkedin, Mail, Send } from "lucide-react";
+import { personalInfo, socialLinks, seoData, skills } from "../data/personalData";
 import { useEffect, useState } from "react";
 import { fetchHygraphPosts } from "../utils/fetchHygraphPosts";
 
 const Home = () => {
-  const [hygraphProjects, setHygraphProjects] = useState([]);
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    async function getPosts() {
-      const posts = await fetchHygraphPosts();
-      setHygraphProjects(
-        posts.map((post) => ({
-          id: post.id,
-          title: post.title,
-          description: post.description,
-          image: post.image?.url,
-          technologies: post.technologies?.html
-            ? post.technologies.html
-                .replace(/<[^>]+>/g, "")
-                .split(/[ ,\u00b7\u2022\n]+/)
-                .filter(Boolean)
-            : [],
-          url: post.demoLink,
-          github: post.githubLink,
-          slug: post.slug,
-          content: post.content?.html,
-        })),
+    fetchHygraphPosts().then((posts) => {
+      setProjects(
+        posts.map((p) => ({
+          id: p.id,
+          title: p.title,
+          description: p.description,
+          image: p.image?.url,
+          url: p.demoLink,
+          github: p.githubLink,
+        }))
       );
-    }
-    getPosts();
+    });
   }, []);
 
-  const iconMap = {
-    Github,
-    Linkedin,
-    Send,
-    Mail,
-  };
-
-  // --- UI Uyg'unligi uchun asosiy wrapper class qo'shildi ---
-  // Barcha sahifada bir xil background va text color
-  // bg-gray-50 dark:bg-gray-900, text-gray-900 dark:text-white
+  const iconMap = { Github, Linkedin, Send, Mail };
 
   return (
     <>
       <Helmet>
         <title>{seoData.title}</title>
         <meta name="description" content={seoData.description} />
-        <meta name="keywords" content={seoData.keywords} />
-        <meta name="author" content={seoData.author} />
-        <meta property="og:title" content={seoData.title} />
-        <meta property="og:description" content={seoData.description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={seoData.url} />
-        <link rel="canonical" href={seoData.url} />
       </Helmet>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px)`,
-              backgroundSize: "50px 50px",
-            }}
-          ></div>
-        </div>
+      {/* Hero */}
+      <section className="min-h-screen flex items-center bg-black">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-emerald-500 font-medium mb-4"
+              >
+                Hello, I'm
+              </motion.p>
 
-        {/* Floating Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <motion.div
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -50, 0],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-500 rounded-full opacity-60"
-          />
-          <motion.div
-            animate={{
-              x: [0, -80, 0],
-              y: [0, 60, 0],
-              rotate: [0, -180, -360],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "linear",
-              delay: 2,
-            }}
-            className="absolute top-1/3 right-1/3 w-3 h-3 bg-purple-500 rounded-full opacity-40"
-          />
-          <motion.div
-            animate={{
-              x: [0, 60, 0],
-              y: [0, -80, 0],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "linear",
-              delay: 4,
-            }}
-            className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-green-500 rounded-full opacity-50"
-          />
-        </div>
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Column - Main Content */}
-            <div className="lg:col-span-8 text-left">
-              {/* Badge */}
-              <motion.div
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex items-center px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm font-medium mb-6"
+                transition={{ delay: 0.1 }}
+                className="text-5xl lg:text-7xl font-bold text-white mb-6"
               >
-                <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                Available for work
-              </motion.div>
+                {personalInfo.name}
+              </motion.h1>
 
-              {/* Name & Title */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
-                  <span className="text-white">
-                    {personalInfo.name.split(" ")[0]}
-                  </span>
-                  <br />
-                  <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-                    {personalInfo.name.split(" ")[1]}
-                  </span>
-                </h1>
-                <p className="text-xl sm:text-2xl text-gray-400 mb-8 font-light">
-                  {personalInfo.title}
-                </p>
-              </motion.div>
-
-              {/* Bio */}
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-lg text-gray-300 mb-12 leading-relaxed max-w-2xl"
+                transition={{ delay: 0.2 }}
+                className="text-xl text-neutral-400 mb-4"
+              >
+                {personalInfo.title}
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-neutral-400 mb-10 max-w-lg leading-relaxed"
               >
                 {personalInfo.bio}
               </motion.p>
 
-              {/* Action Buttons - Modern Layout */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-wrap gap-4 mb-16"
+                transition={{ delay: 0.4 }}
+                className="flex flex-wrap gap-4 mb-12"
               >
-                {/* Primary CTA */}
                 <Link
                   to="/portfolio"
-                  className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-2xl shadow-blue-500/25"
+                  className="px-6 py-3 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors"
                 >
-                  <span className="flex items-center">
-                    <Briefcase className="mr-2 h-5 w-5" />
-                    View My Work
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                  View Work
                 </Link>
-
-                {/* Secondary CTA */}
                 <Link
                   to="/contact"
-                  className="group px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl text-white font-semibold hover:bg-white/10 transition-all duration-300"
+                  className="px-6 py-3 border border-neutral-700 text-white hover:border-neutral-500 transition-colors"
                 >
-                  <span className="flex items-center">
-                    <Mail className="mr-2 h-5 w-5" />
-                    Let's Talk
-                  </span>
+                  Contact Me
                 </Link>
-
-                {/* Resume Download */}
                 {personalInfo.resume && (
                   <a
                     href={personalInfo.resume}
                     download
-                    className="group px-6 py-4 border-2 border-green-500/50 text-green-400 rounded-xl font-semibold hover:bg-green-500/10 transition-all duration-300"
+                    className="px-6 py-3 border border-neutral-700 text-white hover:border-neutral-500 transition-colors flex items-center gap-2"
                   >
-                    <span className="flex items-center">
-                      <Download className="mr-2 h-4 w-4" />
-                      Resume
-                    </span>
+                    <Download size={18} />
+                    Resume
                   </a>
                 )}
               </motion.div>
-            </div>
 
-            {/* Right Column - Profile & Social */}
-            <div className="lg:col-span-4 flex flex-col items-center lg:items-end space-y-8">
-              {/* Profile Image */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="relative"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="flex gap-4"
               >
-                <div className="w-48 h-48 rounded-3xl bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 p-1">
-                  <div className="w-full h-full rounded-3xl bg-gray-900 flex items-center justify-center text-6xl font-bold text-gray-200">
-                    {personalInfo.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </div>
-                </div>
-
-                {/* Decorative Elements */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute -inset-4 border border-blue-500/20 rounded-3xl"
-                />
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 25,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute -inset-8 border border-purple-500/10 rounded-3xl"
-                />
-              </motion.div>
-
-              {/* Social Links - Creative Layout */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                className="flex flex-col space-y-4"
-              >
-                {socialLinks.map((social, index) => {
-                  const Icon = iconMap[social.icon];
-                  const positions = [
-                    "translate-x-0",
-                    "translate-x-8",
-                    "translate-x-4",
-                    "translate-x-12",
-                  ];
-
+                {socialLinks.map((s) => {
+                  const Icon = iconMap[s.icon];
                   return (
-                    <motion.a
-                      key={social.name}
-                      href={social.url}
+                    <a
+                      key={s.name}
+                      href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Link to my ${social.name} profile`}
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: 1.2 + index * 0.1 }}
-                      whileHover={{
-                        scale: 1.1,
-                        x: -10,
-                        transition: { duration: 0.2 },
-                      }}
-                      className={`flex items-center space-x-3 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 ${positions[index]}`}
+                      aria-label={s.name}
+                      className="p-3 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 transition-colors"
                     >
                       <Icon size={20} />
-                      <span className="font-medium">{social.name}</span>
-                    </motion.a>
+                    </a>
                   );
                 })}
               </motion.div>
             </div>
-          </div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          >
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              className="hidden lg:flex justify-center"
             >
-              <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="w-1 h-3 bg-gray-400 rounded-full mt-2"
-              />
+              <div className="w-96 border border-neutral-800">
+                {/* Terminal header */}
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-neutral-800">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                  <span className="ml-2 text-xs text-neutral-600">developer.js</span>
+                </div>
+                {/* Code content */}
+                <div className="p-5 font-mono text-base">
+                  <p className="text-neutral-500">{"// Welcome"}</p>
+                  <p className="mt-2">
+                    <span className="text-purple-400">const</span>{" "}
+                    <span className="text-white">developer</span>{" "}
+                    <span className="text-neutral-500">=</span>{" "}
+                    <span className="text-neutral-500">{"{"}</span>
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-neutral-400">name:</span>{" "}
+                    <span className="text-emerald-400">'Firdavs'</span>
+                    <span className="text-neutral-500">,</span>
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-neutral-400">role:</span>{" "}
+                    <span className="text-emerald-400">'Fullstack'</span>
+                    <span className="text-neutral-500">,</span>
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-neutral-400">available:</span>{" "}
+                    <span className="text-orange-400">true</span>
+                    <span className="text-neutral-500">,</span>
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-neutral-400">skills:</span>{" "}
+                    <span className="text-neutral-500">[</span>
+                    <span className="text-emerald-400">'React'</span>
+                    <span className="text-neutral-500">,</span>{" "}
+                    <span className="text-emerald-400">'Node'</span>
+                    <span className="text-neutral-500">]</span>
+                  </p>
+                  <p>
+                    <span className="text-neutral-500">{"}"}</span>
+                    <span className="text-neutral-500">;</span>
+                  </p>
+                  <p className="mt-3 flex items-center">
+                    <span className="text-emerald-500">▸</span>
+                    <span className="ml-2 w-2 h-4 bg-emerald-500 animate-pulse" />
+                  </p>
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Quick Stats Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center p-8 bg-black border border-gray-800 rounded-xl"
-            >
-              <div className="text-4xl font-bold text-blue-400 mb-2">
-                {hygraphProjects.length}+
-              </div>
-              <div className="text-gray-300 font-medium">
-                Projects Completed
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-center p-8 bg-black border border-gray-800 rounded-xl"
-            >
-              <div className="text-4xl font-bold text-purple-400 mb-2">
-                {skills.technicalSkills.reduce(
-                  (acc, category) => acc + category.skills.length,
-                  0,
-                )}
-                +
-              </div>
-              <div className="text-gray-300 font-medium">Technologies</div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-center p-8 bg-black border border-gray-800 rounded-xl"
-            >
-              <div className="text-4xl font-bold text-green-400 mb-2">1+</div>
-              <div className="text-gray-300 font-medium">Years Experience</div>
-            </motion.div>
+      {/* Stats */}
+      <section className="py-20 bg-neutral-950 border-y border-neutral-900">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-3 gap-8 text-center">
+            <div>
+              <p className="text-4xl font-bold text-white mb-2">{projects.length}+</p>
+              <p className="text-neutral-400">Projects</p>
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-white mb-2">
+                {skills.technicalSkills.reduce((a, c) => a + c.skills.length, 0)}+
+              </p>
+              <p className="text-neutral-400">Technologies</p>
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-white mb-2">1+</p>
+              <p className="text-neutral-400">Years</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-white mb-4">
-              Featured Work
-            </h2>
-            <p className="text-xl text-gray-400">
-              Recent projects I'm proud of
-            </p>
-          </motion.div>
+      <section className="py-24 bg-black">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <p className="text-emerald-500 font-medium mb-2">Portfolio</p>
+              <h2 className="text-3xl font-bold text-white">Featured Work</h2>
+            </div>
+            <Link
+              to="/portfolio"
+              aria-label="View all projects"
+              className="text-neutral-400 hover:text-white flex items-center gap-2 transition-colors"
+            >
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {hygraphProjects.slice(0, 3).map((project, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.slice(0, 3).map((p, i) => (
               <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
+                key={p.id}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-500/50 transition-all duration-300"
+                className="group border border-neutral-800 hover:border-neutral-700 transition-colors"
               >
-                <div className="h-48 relative overflow-hidden">
-                  {project.image ? (
+                <div className="h-48 bg-neutral-900 overflow-hidden">
+                  {p.image ? (
                     <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600">
-                      <Code size={48} className="text-white opacity-50" />
+                    <div className="w-full h-full flex items-center justify-center text-neutral-700">
+                      <span className="text-4xl font-bold">{p.title[0]}</span>
                     </div>
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-400 mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex space-x-4">
-                    {project.url && (
+                  <h3 className="text-lg font-semibold text-white mb-2">{p.title}</h3>
+                  <p className="text-neutral-400 text-sm line-clamp-2 mb-4">{p.description}</p>
+                  <div className="flex gap-4">
+                    {p.url && (
                       <a
-                        href={project.url}
+                        href={p.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`View live demo of ${project.title}`}
-                        className="text-blue-400 hover:text-blue-300 font-medium flex items-center"
+                        aria-label={`View ${p.title} live`}
+                        className="text-emerald-500 text-sm hover:text-emerald-400"
                       >
-                        <ExternalLink size={16} className="mr-1" />
-                        Live
+                        Live →
                       </a>
                     )}
-                    {project.github && (
+                    {p.github && (
                       <a
-                        href={project.github}
+                        href={p.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`View source code of ${project.title} on GitHub`}
-                        className="text-gray-400 hover:text-gray-300 font-medium flex items-center"
+                        aria-label={`View ${p.title} code`}
+                        className="text-neutral-400 text-sm hover:text-white"
                       >
-                        <Github size={16} className="mr-1" />
-                        Code
+                        Code →
                       </a>
                     )}
                   </div>
@@ -462,22 +282,6 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
-            >
-              View All Projects
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </motion.div>
         </div>
       </section>
     </>
