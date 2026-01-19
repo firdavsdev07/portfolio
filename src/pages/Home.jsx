@@ -16,8 +16,11 @@ const Home = () => {
         posts.map((p) => ({
           id: p.id,
           title: p.title,
-          description: p.description,
+          content: p.content?.html,
           image: p.image?.url,
+          technologies: p.technologies?.html
+            ? p.technologies.html.replace(/<[^>]+>/g, "").split(/[ ,·•\n]+/).filter(Boolean)
+            : [],
           url: p.demoLink,
           github: p.githubLink,
         }))
@@ -253,7 +256,28 @@ const Home = () => {
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-white mb-2">{p.title}</h3>
-                  <p className="text-neutral-400 text-sm line-clamp-2 mb-4">{p.description}</p>
+                  {p.content && (
+                    <p className="text-neutral-400 text-sm mb-4">
+                      {p.content.replace(/<[^>]+>/g, "").substring(0, 100)}...
+                    </p>
+                  )}
+                  {p.technologies.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {p.technologies.slice(0, 4).map((t, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-1 text-xs border border-neutral-800 text-neutral-400"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                      {p.technologies.length > 4 && (
+                        <span className="px-2 py-1 text-xs border border-neutral-800 text-neutral-400">
+                          +{p.technologies.length - 4}
+                        </span>
+                      )}
+                    </div>
+                  )}
                   <div className="flex gap-4">
                     {p.url && (
                       <a
