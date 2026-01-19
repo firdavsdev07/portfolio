@@ -8,6 +8,7 @@ import { fetchHygraphPosts } from "../utils/fetchHygraphPosts";
 const Portfolio = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expandedId, setExpandedId] = useState(null);
 
   useEffect(() => {
     fetchHygraphPosts().then((posts) => {
@@ -15,7 +16,7 @@ const Portfolio = () => {
         posts.map((p) => ({
           id: p.id,
           title: p.title,
-          description: p.description,
+          content: p.content?.html,
           image: p.image?.url,
           technologies: p.technologies?.html
             ? p.technologies.html.replace(/<[^>]+>/g, "").split(/[ ,·•\n]+/).filter(Boolean)
@@ -85,11 +86,40 @@ const Portfolio = () => {
 
                   <div className="p-6">
                     <h3 className="text-lg font-semibold text-white mb-2">{p.title}</h3>
-                    <p className="text-neutral-400 text-sm line-clamp-2 mb-4">{p.description}</p>
+                    {p.content && (
+                      <>
+                        {(() => {
+                          const cleanContent = p.content.replace(/<[^>]+>/g, "");
+                          const contentLength = cleanContent.length;
+                          return (
+                            <>
+                              <div className="overflow-hidden">
+                                <p 
+                                  className="text-neutral-400 text-sm mb-4"
+                                >
+                                  {expandedId === p.id ? cleanContent : cleanContent.substring(0, 130) + (cleanContent.length > 130 ? "..." : "")}
+                                </p>
+                              </div>
+                              {contentLength > 100 && (
+                                <button
+                                  onClick={() => {
+                                    const newId = expandedId === p.id ? null : p.id;
+                                    setExpandedId(newId);
+                                  }}
+                                  className="text-emerald-500 text-xs hover:text-emerald-400 mb-4"
+                                >
+                                  {expandedId === p.id ? "Show less" : "Read more"}
+                                </button>
+                              )}
+                            </>
+                          );
+                        })()}
+                      </>
+                    )}
 
                     {p.technologies.length > 0 && (
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {p.technologies.slice(0, 4).map((t, idx) => (
+                        {p.technologies.map((t, idx) => (
                           <span
                             key={idx}
                             className="px-2 py-1 text-xs border border-neutral-800 text-neutral-400"
