@@ -104,9 +104,9 @@ const Contact = () => {
                 <div className="w-10 h-10 rounded-xl border border-zinc-800 flex items-center justify-center group-hover:border-zinc-600 transition-colors flex-shrink-0">
                   <Mail size={15} className="text-zinc-500" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs text-zinc-600 mb-0.5">Email</p>
-                  <p className="text-zinc-300 text-sm group-hover:text-white transition-colors">
+                  <p className="text-zinc-300 text-sm group-hover:text-white transition-colors break-all">
                     {personalInfo.email}
                   </p>
                 </div>

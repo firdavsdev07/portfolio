@@ -56,7 +56,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 }}
-                className="text-6xl md:text-7xl xl:text-8xl font-bold text-white tracking-tight leading-[1.02]"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight leading-[1.02]"
               >
                 Firdavs
                 <br />
