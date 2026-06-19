@@ -30,10 +30,20 @@ export const experience = [
   },
   {
     role: "Fullstack Developer",
+    company: "WebGrade",
+    period: "2025",
+    points: [
+      "Contributed to 3 fullstack web projects serving real business clients",
+      "Worked primarily on backend: NestJS, PostgreSQL, Prisma — API design and database architecture",
+      "Projects span fueling management, course discovery and horse marketplace",
+    ],
+  },
+  {
+    role: "Fullstack Developer",
     company: "Freelance",
     period: "2025",
     points: [
-      "Designed, developed and deployed 3 production web applications for real clients",
+      "Designed, developed and deployed 4 production web applications for real clients",
       "Handled full cycle independently: requirements, architecture, coding, server setup on DigitalOcean",
     ],
   },
@@ -89,10 +99,11 @@ export const projects = [
     url: "https://nbsgazoil.uz",
     github: null,
     description:
-      "Service platform for CNG stations. Payment and check tracking for drivers with full backend architecture deployed on DigitalOcean.",
-    tech: ["NestJS", "Prisma", "PostgreSQL", "DigitalOcean"],
+      "CNG station management system for WebGrade. Drivers receive a receipt with QR code after fueling; scanning the QR records the exact liters consumed to the driver's account.",
+    tech: ["React", "NestJS", "Prisma", "PostgreSQL"],
     image: "/projects/nbsgazoil.jpg",
     featured: false,
+    company: "WebGrade",
   },
   {
     id: 4,
@@ -104,6 +115,52 @@ export const projects = [
     tech: ["Next.js", "Supabase", "Payment"],
     image: "/projects/tezku.png",
     featured: false,
+  },
+  {
+    id: 5,
+    title: "Otbozor.uz",
+    url: "https://otbozor.uz",
+    github: null,
+    description:
+      "Dedicated marketplace for buying and selling horses in Uzbekistan. Sellers list horses with full details; buyers browse, filter and contact sellers directly.",
+    tech: ["Next.js", "NestJS", "TypeScript", "Prisma", "PostgreSQL"],
+    image: "/projects/otbozor.png",
+    featured: false,
+    company: "WebGrade",
+  },
+  {
+    id: 6,
+    title: "Dokonect.uz",
+    url: "https://www.dokonect.uz",
+    github: null,
+    description:
+      "Business automation platform: agent-free sales, automatic order processing and full operational control. Built the backend API and server architecture.",
+    tech: ["NestJS", "React", "Flutter", "PostgreSQL"],
+    image: "/projects/dokonect.png",
+    featured: false,
+  },
+  {
+    id: 7,
+    title: "PrismSync",
+    url: "https://prismsync-web.vercel.app/",
+    github: null,
+    description:
+      "Open-source database migration tool that transfers data bidirectionally between PostgreSQL and MongoDB — built as a small side project and released publicly.",
+    tech: ["TypeScript", "PostgreSQL", "MongoDB"],
+    image: "/projects/prismsync.png",
+    featured: false,
+  },
+  {
+    id: 8,
+    title: "DarsLinker",
+    url: "https://darslinker.uz",
+    github: null,
+    description:
+      "Uzbekistan's course discovery platform: find, compare and choose from online and offline courses across all subjects and regions. Built the backend API.",
+    tech: ["NestJS", "Next.js", "PostgreSQL"],
+    image: "/projects/darslinker.png",
+    featured: false,
+    company: "WebGrade",
   },
 ];
 
