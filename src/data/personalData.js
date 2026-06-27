@@ -28,16 +28,16 @@ export const experience = [
       "Conduct code reviews, mentor on clean architecture and best practices",
     ],
   },
-  {
-    role: "Fullstack Developer",
-    company: "WebGrade",
-    period: "2025",
-    points: [
-      "Contributed to 3 fullstack web projects serving real business clients",
-      "Worked primarily on backend: NestJS, PostgreSQL, Prisma — API design and database architecture",
-      "Projects span fueling management, course discovery and horse marketplace",
-    ],
-  },
+  // {
+  //   role: "Fullstack Developer",
+  //   company: "",
+  //   period: "2025",
+  //   points: [
+  //     "Contributed to 3 fullstack web projects serving real business clients",
+  //     "Worked primarily on backend: NestJS, PostgreSQL, Prisma — API design and database architecture",
+  //     "Projects span fueling management, course discovery and horse marketplace",
+  //   ],
+  // },
   {
     role: "Fullstack Developer",
     company: "Freelance",
@@ -93,18 +93,18 @@ export const projects = [
     image: "/projects/mrblackmaster.png",
     featured: true,
   },
-  {
-    id: 3,
-    title: "NBS Gaz Oil",
-    url: "https://nbsgazoil.uz",
-    github: null,
-    description:
-      "CNG station management system for WebGrade. Drivers receive a receipt with QR code after fueling; scanning the QR records the exact liters consumed to the driver's account.",
-    tech: ["React", "NestJS", "Prisma", "PostgreSQL"],
-    image: "/projects/nbsgazoil.jpg",
-    featured: false,
-    company: "WebGrade",
-  },
+  // {
+  //   id: 3,
+  //   title: "NBS Gaz Oil",
+  //   url: "https://nbsgazoil.uz",
+  //   github: null,
+  //   description:
+  //     "CNG station management system for WebGrade. Drivers receive a receipt with QR code after fueling; scanning the QR records the exact liters consumed to the driver's account.",
+  //   tech: ["React", "NestJS", "Prisma", "PostgreSQL"],
+  //   image: "/projects/nbsgazoil.jpg",
+  //   featured: false,
+  //   company: "WebGrade",
+  // },
   {
     id: 4,
     title: "Tezku.uz",
@@ -116,18 +116,18 @@ export const projects = [
     image: "/projects/tezku.png",
     featured: false,
   },
-  {
-    id: 5,
-    title: "Otbozor.uz",
-    url: "https://otbozor.uz",
-    github: null,
-    description:
-      "Dedicated marketplace for buying and selling horses in Uzbekistan. Sellers list horses with full details; buyers browse, filter and contact sellers directly.",
-    tech: ["Next.js", "NestJS", "TypeScript", "Prisma", "PostgreSQL"],
-    image: "/projects/otbozor.png",
-    featured: false,
-    company: "WebGrade",
-  },
+  // {
+  //   id: 5,
+  //   title: "Otbozor.uz",
+  //   url: "https://otbozor.uz",
+  //   github: null,
+  //   description:
+  //     "Dedicated marketplace for buying and selling horses in Uzbekistan. Sellers list horses with full details; buyers browse, filter and contact sellers directly.",
+  //   tech: ["Next.js", "NestJS", "TypeScript", "Prisma", "PostgreSQL"],
+  //   image: "/projects/otbozor.png",
+  //   featured: false,
+  //   company: "WebGrade",
+  // },
   {
     id: 6,
     title: "Dokonect.uz",
@@ -150,18 +150,18 @@ export const projects = [
     image: "/projects/prismsync.png",
     featured: false,
   },
-  {
-    id: 8,
-    title: "DarsLinker",
-    url: "https://darslinker.uz",
-    github: null,
-    description:
-      "Uzbekistan's course discovery platform: find, compare and choose from online and offline courses across all subjects and regions. Built the backend API.",
-    tech: ["NestJS", "Next.js", "PostgreSQL"],
-    image: "/projects/darslinker.png",
-    featured: false,
-    company: "WebGrade",
-  },
+  // {
+  //   id: 8,
+  //   title: "DarsLinker",
+  //   url: "https://darslinker.uz",
+  //   github: null,
+  //   description:
+  //     "Uzbekistan's course discovery platform: find, compare and choose from online and offline courses across all subjects and regions. Built the backend API.",
+  //   tech: ["NestJS", "Next.js", "PostgreSQL"],
+  //   image: "/projects/darslinker.png",
+  //   featured: false,
+  //   company: "WebGrade",
+  // },
 ];
 
 export const seo = {
